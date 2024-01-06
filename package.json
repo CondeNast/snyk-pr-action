@@ -1,7 +1,7 @@
 {
   "name": "snyk-pr-action",
   "version": "1.2.12",
-  "description": "Starter for GitHub Actions with TypeScript and automated releases",
+  "description": "A GitHub Action to automate the handling of PRs raised by Snyk",
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc",
@@ -20,7 +20,7 @@
     "dependencies",
     "Snyk"
   ],
-  "author": "Anand Chowdhary <mail@anandchowdhary.com>",
+  "author": "Garry Yao <garry.yao@condenast.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/condenast/snyk-pr-action/issues"
