@@ -1,4 +1,5 @@
-import { mocked } from "ts-jest/utils";
+import {expect, jest, test, describe, afterAll, beforeAll} from '@jest/globals';
+
 import { run } from "../lib/run";
 import { addLabelsToPR, autoApprovePR, tryAutoMergePR } from "../lib/utils";
 import { back as nockBack } from "nock";
@@ -9,8 +10,8 @@ nockBack.setMode("lockdown");
 
 jest.mock("@actions/core");
 jest.mock("../lib/utils");
-const mockGetInput = mocked(getInput);
-const mockLogInfo = mocked(logInfo);
+const mockGetInput = jest.mocked(getInput);
+const mockLogInfo = jest.mocked(logInfo);
 mockLogInfo.mockImplementation(console.log.bind(console));
 
 const getInputDefaults = (name: string): string => {
@@ -65,7 +66,7 @@ describe("snyk-pr-action", () => {
 
   describe("scheduled run", () => {
     beforeAll(async () => {
-      mockGetInput.mockImplementation((name) => {
+      mockGetInput.mockImplementation((name: string) => {
         const inputVal = getInputDefaults(name);
         if (!inputVal) {
           switch (name) {
@@ -95,9 +96,7 @@ describe("snyk-pr-action", () => {
       });
 
       // Use the following PR mocks as:
-      // #2199: [Snyk] Security upgrade dd-trace from 0.30.6 to 1.2.0
-      // #1016: [Snyk] Security upgrade fs-extra from 10.0.0 to 11.0.0
-      // #1015: [Snyk] Security upgrade node-fetch from 2.6.7 to 2.6.9
+      // #2199: [Snyk] Security upgrade node from 18.17.1-alpine to 18.19-alpine
       const { nockDone } = await nockBack("pulls_2.json");
       await run();
       nockDone();

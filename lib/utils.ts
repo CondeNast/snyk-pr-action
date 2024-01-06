@@ -41,7 +41,7 @@ export const tryAutoMergePR = async (
         .replace("$PR_NUMBER", prNumber.toString())
         .replace("$PR_TITLE", prTitle),
     });
-  } catch (error) {
+  } catch (error: any) {
     logError(error);
     await wait(delaySeconds * 1000);
     if (delaySeconds > 9) {
@@ -49,7 +49,7 @@ export const tryAutoMergePR = async (
       if (/not mergeable/.test(error.message) && conflictLabel) {
         try {
           await addLabelsToPR(octokit, owner, repo, prNumber, conflictLabel);
-        } catch (error) {
+        } catch (error: any) {
           logError(error);
         }
       }

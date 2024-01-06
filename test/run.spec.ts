@@ -1,4 +1,5 @@
-import { mocked } from "ts-jest/utils";
+import {expect, jest, test, describe, afterAll, beforeAll} from '@jest/globals';
+
 import { run } from "../lib/run";
 import { addLabelsToPR, autoApprovePR, tryAutoMergePR } from "../lib/utils";
 import { back as nockBack } from "nock";
@@ -9,8 +10,8 @@ nockBack.setMode("lockdown");
 
 jest.mock("@actions/core");
 jest.mock("../lib/utils");
-const mockGetInput = mocked(getInput);
-const mockLogInfo = mocked(logInfo);
+const mockGetInput = jest.mocked(getInput);
+const mockLogInfo = jest.mocked(logInfo);
 mockLogInfo.mockImplementation(console.log.bind(console));
 
 const getInputDefaults = (name: string): string => {
