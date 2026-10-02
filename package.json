@@ -43,7 +43,7 @@
     "@actions/core": "^1.9.1",
     "@actions/github": "^4.0.0",
     "@koj/config": "^1.2.5",
-    "semver": "^7.3.8"
+    "semver": "7.5.2"
   },
   "jest": {
     "roots": [
